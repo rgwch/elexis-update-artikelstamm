@@ -1,0 +1,7 @@
+node_modules
+dest
+samples
+.env
+data/Preparations.xml
+data/XMLPublications.zip
+data/import.log
