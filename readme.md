@@ -16,7 +16,7 @@ https://www.hin.ch/services/mediupdate-xml/
 
 Then, it extracts informations from there and updates the "artikelstamm_ch" and "artikel" tables in Elexis. Unlike the original importer, it does not run from the Elexis program, but directly on the database. Ths way, it can run automatically as a cron job on Linux servers without interrupting normal work.
 
-**Note: This program comes with absolutely no warranty. If you use it, you do so a your own risk.**
+**Note: This program comes with absolutely no warranty. If you use it, you do so at your own risk.**
 
 ## Getting started
 
