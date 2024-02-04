@@ -11,7 +11,7 @@ export class Importer {
         log.write("Importer created\n " + new Date().toISOString() + "\n")
     }
     /**
-     * Connect to the database
+     * Connect to the database and read the last update date from the version entry
      */
     public async connect() {
         this.conn = await mysql.createConnection({
@@ -30,6 +30,9 @@ export class Importer {
         }
 
     }
+    /**
+     * Update the lastupdate and dscr field of the version entry and close the connection
+     */
     public async finish() {
         if (this.conn !== null) {
             const lu = new Date().getTime()
@@ -42,18 +45,16 @@ export class Importer {
         }
     }
     /**
-     * Match a Preparation from Preparations.xml with artikelstamm_ch. Update if something changed
+     * Match a Preparation from Preparations.xml with artikelstamm_ch. Update if something changed. Add if not found.
      * @param prep 
-     * @returns 
+     * @returns true if successful, false if an error occured
      */
     public async process(prep: Preparation): Promise<boolean> {
         if (this.conn === null) {
             await this.connect();
         }
-        // console.log(prep.NameDe);
         const packs = Array.isArray(prep.Packs.Pack) ? prep.Packs.Pack : [prep.Packs.Pack];
         for (const pack of packs) {
-            // console.log(pack.DescriptionDe);
             let ex: Partial<ArtikelstammItem> | null = null
             try {
                 const [rows, fields] = await this.conn!.execute("SELECT * FROM artikelstamm_ch WHERE GTIN = ?", [pack.GTIN]);
@@ -76,6 +77,7 @@ export class Importer {
                         type: "P",
                         bb: "0",
                         sl_entry: "1",
+                        gtin: pack.GTIN
                     }
                     this.updateEntry(ex, prep, pack)
                     const keys = Object.keys(ex).join(", ")
@@ -98,6 +100,12 @@ export class Importer {
         return true
     }
 
+    /**
+     * Match a database entry with a Preparation and a Pack. Update the entry with the new data.
+     * @param ex 
+     * @param prep 
+     * @param pack 
+     */
     private updateEntry(ex: any, prep: any, pack: any) {
         ex.lastupdate = new Date().getTime()
         ex.dscr = prep.NameDe + " " + prep.DescriptionDe + " " + pack.DescriptionDe

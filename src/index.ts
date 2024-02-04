@@ -1,3 +1,6 @@
+/**
+ * @fileoverview This is the main file for the swissmedic importer
+ */
 import "dotenv/config";
 import { Parser } from "./parser";
 import { Importer } from "./importer"
@@ -13,6 +16,11 @@ const log = createWriteStream(logfile)
 
 download().then(() => loadData()).then(() => console.log("done")).catch(err => { console.error(err); process.exit(1) });
 
+/**
+ * Get the last modification time of a file
+ * @param fname 
+ * @returns 
+ */
 async function gettime(fname: string) {
     try {
         const stat = await fs.stat(fname)
@@ -21,6 +29,11 @@ async function gettime(fname: string) {
         return null
     }
 }
+/**
+ * Check if XMLPublications.zip exists and is not older than max_age. If nessecary, download it.
+ * Then extract Preparations.xml from the zip file and process it.
+ * @returns true if successful, false if an error occured
+ */
 async function download(): Promise<boolean> {
     const max_age = parseInt(process.env.max_age || (1000 * 60 * 60 * 24 * 7).toString())
     const url = process.env.SWISSMEDIC_URL || SWISSMEDIC_URL
@@ -64,21 +77,12 @@ async function download(): Promise<boolean> {
     }
 }
 
-
+/**
+ * Read the SL data from Preparations.xml and process it with the importer
+ * @returns 
+ */
 async function loadData() {
     const importer = new Importer(log)
-    /*
-    console.log(path.join(__dirname, "../samples/oddb_product.xml"))
-    const prdraw = await parser.parse(path.join(__dirname, "../samples/oddb_product.xml"));
-    const products: Array<Product> = prdraw.PRODUCT.PRD;
-    */
-    /*
-     console.log(path.join(__dirname, "../samples/oddb_article.xml"))
-     const artraw = await parser.parse(path.join(__dirname, "../samples/oddb_article.xml"));
-     const articles = artraw.ARTICLE.ART;
-     console.log(articles.length)
-     console.log(JSON.stringify(articles[21199], null, 2))
-     */
     console.log(path.join(__dirname, "../data/Preparations.xml"))
     const prepraw = await parser.parse(path.join(__dirname, "../data/Preparations.xml"));
     const preparations: Array<Preparation> = prepraw.Preparations.Preparation;

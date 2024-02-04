@@ -1,6 +1,9 @@
 import { XMLParser } from "fast-xml-parser";
 import fs from "fs/promises";
 
+/**
+ * Convert XML to JSON
+ */
 export class Parser {
     private parser = new XMLParser();
     constructor() { }

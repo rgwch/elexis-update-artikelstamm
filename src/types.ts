@@ -1,5 +1,6 @@
-import exp from "constants"
-
+/**
+ * Product from oddb_product.xml
+ */
 export type Product = {
     GTIN: string
     PRODNO: string
@@ -14,6 +15,9 @@ export type Product = {
     CompositionSwissmedic: string
 }
 
+/**
+ * Article from oddb_article.xml
+ */
 export type Article = {
     REF_DATA: number
     SALECD: string
@@ -34,6 +38,9 @@ export type Article = {
     }
 }
 
+/**
+ * Preparation from Preparations.xml
+ */
 export type Preparation = {
     NameDe: string
     NameFr: string
@@ -133,6 +140,9 @@ export type Limitation = {
     ValidThruDate: string
 }
 
+/**
+ * Entry of the articlestamm_ch table
+ */
 export type ArtikelstammItem = {
     id: string
     lastupdate: number
@@ -175,6 +185,9 @@ export type ArtikelstammItem = {
     K70_ENTRY?: "0" | "1"
 }
 
+/**
+ * Entry of the artikel table
+ */
 export type ArtikelItem = {
     id: string
     deleted: "0" | "1"
