@@ -32,7 +32,7 @@ nano .env
   mysql_user=<username for mysql server>
   mysql_pwd=<password for mysql server>
   mysql_db=<database name of the elexis DB>
-^Z
+^X
 npm run build
 node dest/index.js
 ```
