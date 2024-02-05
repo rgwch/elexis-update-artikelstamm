@@ -1,5 +1,5 @@
 import { Writable } from "stream";
-import { ArtikelstammItem, Limitation, Preparation, Substance } from "./types";
+import { ArtikelstammItem, Limitation, Pack, Preparation, Substance } from "./types";
 import mysql from "mysql2/promise";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -106,7 +106,7 @@ export class Importer {
      * @param prep 
      * @param pack 
      */
-    private updateEntry(ex: any, prep: any, pack: any) {
+    private updateEntry(ex: ArtikelstammItem, prep: Preparation, pack: Pack) {
         ex.lastupdate = new Date().getTime()
         ex.dscr = prep.NameDe + " " + prep.DescriptionDe + " " + pack.DescriptionDe
         ex.LDSCR = prep.CommentDe.substring(0, 99) || ""

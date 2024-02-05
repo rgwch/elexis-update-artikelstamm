@@ -14,9 +14,9 @@ https://www.hin.ch/services/mediupdate-xml/
 (List of other medical products available in Switzerland. This list s provided by [ywesee GmbH](https://ywesee.com), and [Zur Rose](https://www.zurrose.ch))
 -->
 
-Then, it extracts informations from there and updates the "artikelstamm_ch" and "artikel" tables in Elexis. Unlike the original importer, it does not run from the Elexis program, but directly on the database. Ths way, it can run automatically as a cron job on Linux servers without interrupting normal work.
+Then, it extracts informations from there and updates the "artikelstamm_ch" and "artikel" tables in Elexis. Unlike the original importer, it does not run from the Elexis program, but directly on the database. This way, it can run automatically as a cron job on Linux servers without interrupting normal work.
 
-**Note: This program comes with absolutely no warranty. If you use it, you do so at your own risk.**
+**Note: This program comes with absolutely no warranty. If you use it, you do so at your own risk. This program might seriously damage your data. Backup and/or test with an unconnected database instance ist strongly recommended!**
 
 ## Getting started
 
