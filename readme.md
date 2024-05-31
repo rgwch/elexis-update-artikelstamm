@@ -1,6 +1,7 @@
 # Elexis-Update-Artikelstamm
 
 For several years, [Medelexis AG](https://www.medelexis.ch) provided the monthly ["Artikelstamm"](https://artikelstamm.elexis.info/v5/) update, which is necessary in Elexis to prescribe or apply medicaments and medicals available in Switzerland. Recently, this service was (temporarly?) shut down, so OpenSource users were stuck with expired versions.
+(Note: As of May 2024, this traditional Artikelstamm can be found again here [here](https://artikelstamm.framsteg.ch/))
 
 To reduce dependency from commercial sites, this project replaces the medelexis service. It fetches original data from:
 
